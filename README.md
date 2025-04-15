@@ -107,4 +107,23 @@ The application aims to offer three main analysis modes:
 *   **Social Media Scraping:** snscrape (Twitter - planned), PRAW (Reddit - planned), feedparser (RSS - planned)
 *   **Machine Learning:** Scikit-learn (planned)
 *   **Plotting:** Plotly
-*   **Environment:** python-dotenv 
+*   **Environment:** python-dotenv
+
+
+![image](https://github.com/user-attachments/assets/242d93fc-2d5b-4623-ae85-375bb5b63ea2)
+
+![image](https://github.com/user-attachments/assets/05c6b7ae-a282-4f8e-bdd0-fa9d015fb011)
+
+![image](https://github.com/user-attachments/assets/d7f10675-3f3c-4439-b0a5-5900f933e01d)
+
+
+![image](https://github.com/user-attachments/assets/271ccb2b-9630-48ce-8818-bbb32b12b731)
+
+![image](https://github.com/user-attachments/assets/5cf540d6-4151-4a6f-8c16-034e9719d145)
+
+![image](https://github.com/user-attachments/assets/1af29c3f-e999-4ccd-9c2e-daf2088ed3cd)
+
+
+
+
+
