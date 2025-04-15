@@ -1,0 +1,17 @@
+django
+yfinance
+newsapi-python
+vaderSentiment
+scikit-learn
+pandas
+numpy
+requests
+alpha_vantage
+snscrape
+praw
+feedparser
+plotly
+scipy
+python-dotenv
+openai # Or a specific OpenRouter client if preferred/available
+psycopg2-binary # Often needed for Django projects, even with SQLite initially 

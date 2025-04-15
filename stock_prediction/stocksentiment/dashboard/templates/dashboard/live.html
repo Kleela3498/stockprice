@@ -1,0 +1,28 @@
+{% extends 'dashboard/base.html' %}
+
+{% block title %}Live Prediction - Stock Sentiment{% endblock %}
+
+{% block content %}
+    <h1 class="mb-4">Live Stock Prediction</h1>
+    <p class="lead">Get real-time stock data, aggregated sentiment, and LLM-powered predictions.</p>
+    <hr>
+    <!-- Form for selecting stock -->
+     <div class="mb-3">
+        <label for="stockSelectLive" class="form-label">Select Stock:</label>
+        <select class="form-select" id="stockSelectLive" aria-label="Select stock">
+            <option selected disabled>Choose a stock...</option>
+            <option value="AAPL">Apple (AAPL)</option>
+            <option value="TSLA">Tesla (TSLA)</option>
+            <option value="AMZN">Amazon (AMZN)</option>
+            <option value="MSFT">Microsoft (MSFT)</option>
+            <option value="GOOGL">Alphabet (GOOGL)</option>
+            {# Add more stocks if needed #}
+        </select>
+         <button type="submit" class="btn btn-primary mt-2">Get Live Data</button> {# TODO: Form submission logic #}
+    </div>
+    <hr>
+
+    <!-- Live charts and prediction output will be added here -->
+    <p><i>Results will appear below after selecting a stock and clicking Get Live Data.</i></p>
+
+{% endblock %}

@@ -1,0 +1,19 @@
+{% extends 'dashboard/base.html' %}
+
+{% block title %}Home - Stock Sentiment{% endblock %}
+
+{% block content %}
+    <div class="container py-5">
+        <div class="row justify-content-center">
+            <div class="col-lg-8 text-center">
+                <h1 class="display-4 mb-4">Welcome to StockSentiment</h1>
+                <p class="lead mb-5">Your integrated platform for stock analysis, leveraging historical data, real-time sentiment, and advanced predictions.</p>
+                <div class="d-grid gap-3 d-sm-flex justify-content-sm-center">
+                    <a href="{% url 'historic' %}" class="btn btn-primary btn-lg px-4 me-sm-3">Historic Analysis</a>
+                    <a href="{% url 'live' %}" class="btn btn-outline-secondary btn-lg px-4 me-sm-3">Live Prediction</a>
+                    <a href="{% url 'correlation' %}" class="btn btn-outline-info btn-lg px-4">Correlation</a>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

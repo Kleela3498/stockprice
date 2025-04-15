@@ -1,0 +1,101 @@
+{% extends 'dashboard/base.html' %}
+
+{% block title %}Historic Analysis - Stock Sentiment{% endblock %}
+
+{% block content %}
+    <h1 class="mb-4">Historic Stock Analysis</h1>
+    <p class="lead">Analyze historical stock data, news sentiment, and basic ML predictions.</p>
+    <hr>
+
+    {% if error %}
+        <div class="alert alert-danger" role="alert">
+            {{ error }}
+        </div>
+    {% endif %}
+
+    <!-- Form for selecting stocks and date range -->
+    <form method="POST" class="mb-4 row g-3 align-items-end">
+        {% csrf_token %}
+        <div class="col-md-4">
+            <label for="stockSelectHistoric" class="form-label">Select Stocks (up to 5):</label>
+            <select multiple class="form-select" id="stockSelectHistoric" name="stocks" aria-label="Select stocks" required>
+                {% for stock in stocks %}
+                    <option value="{{ stock }}" {% if stock in selected_stocks %}selected{% endif %}>{{ stock }}</option>
+                {% endfor %}
+            </select>
+            <div class="form-text">Hold Command/Ctrl to select multiple.</div>
+        </div>
+        <div class="col-md-3">
+            <label for="startDate" class="form-label">Start Date:</label>
+            <input type="date" class="form-control" id="startDate" name="start_date" value="{{ start_date|date:'Y-m-d' }}" required>
+        </div>
+        <div class="col-md-3">
+            <label for="endDate" class="form-label">End Date:</label>
+            <input type="date" class="form-control" id="endDate" name="end_date" value="{{ end_date|date:'Y-m-d' }}" required>
+        </div>
+        <div class="col-md-2">
+            <button type="submit" class="btn btn-primary w-100">Analyze</button>
+        </div>
+    </form>
+    <hr>
+
+    {% if selected_stocks %}
+        <h2>Results for: {{ selected_stocks|join:", " }}</h2>
+
+        {# --- Charts --- #}
+        <div class="row mt-4">
+            <div class="col-lg-12 mb-4">
+                <h3>Price Chart</h3>
+                {% if price_chart_html %}
+                    {{ price_chart_html|safe }}
+                {% else %}
+                    <p>Price chart could not be generated.</p>
+                {% endif %}
+            </div>
+            <div class="col-lg-12 mb-4">
+                <h3>Sentiment Timeline</h3>
+                 {% if sentiment_chart_html %}
+                    {{ sentiment_chart_html|safe }}
+                 {% else %}
+                    <p>Sentiment timeline could not be generated (may require more news data).</p>
+                 {% endif %}
+            </div>
+        </div>
+
+        {# --- ML Prediction Placeholder --- #}
+        <div class="row mt-4">
+            <div class="col-lg-12 mb-4">
+                 <h3>Prediction (Placeholder)</h3>
+                 <p>Machine learning predictions will be displayed here in a future step.</p>
+                 {# Placeholder for prediction chart/output #}
+            </div>
+        </div>
+
+        {# --- News Articles --- #}
+        <div class="row mt-4">
+            <div class="col-lg-12 mb-4">
+                <h3>Recent News Headlines (Max 20)</h3>
+                {% if news_articles %}
+                    <div class="list-group">
+                        {% for article in news_articles %}
+                            <a href="{{ article.url }}" target="_blank" class="list-group-item list-group-item-action flex-column align-items-start {% if article.sentiment_label == 'Positive' %}list-group-item-success{% elif article.sentiment_label == 'Negative' %}list-group-item-danger{% else %}list-group-item-light{% endif %}">
+                                <div class="d-flex w-100 justify-content-between">
+                                    <h5 class="mb-1">{{ article.title }}</h5>
+                                    <small>{{ article.publishedAt|date:"Y-m-d H:i" }}</small>
+                                </div>
+                                <p class="mb-1">{{ article.description|truncatewords:30 }}</p>
+                                <small>Source: {{ article.source }} | Sentiment: {{ article.sentiment|floatformat:2 }} ({{ article.sentiment_label }})</small>
+                            </a>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    <p>No relevant news articles found for the selected period.</p>
+                {% endif %}
+            </div>
+        </div>
+
+    {% else %}
+        <p><i>Select stocks and click "Analyze" to see results.</i></p>
+    {% endif %}
+
+{% endblock %}
